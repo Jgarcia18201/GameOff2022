@@ -13,6 +13,8 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public TextMeshProUGUI cardName, cardDescription, cardPower, cardCost, cardHealth;
     private Transform originalParent;
 
+    Vector3 cachedScale;
+
     private void Awake()
     {
         
@@ -20,7 +22,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     // Start is called before the first frame update
     private void Start()
     {
-        
+        cachedScale = transform.localScale;
     }
 
     //Assign TextMeshPro data to Card script
@@ -44,27 +46,30 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Enter");
+        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Works");
+        transform.localScale = cachedScale;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("Down");
         transform.SetParent(transform.root);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        Debug.Log("Up");
         transform.SetParent(originalParent);
         transform.localPosition = Vector3.zero;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log("Drag");
         transform.position = eventData.position;
     }
 }
