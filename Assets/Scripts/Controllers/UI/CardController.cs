@@ -14,6 +14,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private Transform originalParent;
 
     Vector3 cachedScale;
+    Vector3 cachedPosition;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private void Start()
     {
         cachedScale = transform.localScale;
+        cachedPosition = transform.localPosition;
     }
 
     //Assign TextMeshPro data to Card script
@@ -47,11 +49,13 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        transform.localPosition = new Vector3(0, 100, 0);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.localScale = cachedScale;
+        transform.localPosition = cachedPosition;
     }
 
     public void OnPointerDown(PointerEventData eventData)
