@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+    private RectTransform dragCard;
     public Card Card;
 
     public Image cardImage;
@@ -18,7 +19,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private void Awake()
     {
-        
+        dragCard = transform as RectTransform;
     }
     // Start is called before the first frame update
     private void Start()
