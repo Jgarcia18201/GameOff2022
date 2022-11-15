@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler, IEndDragHandler
 {
     private RectTransform dragCard;
     public Card Card;
@@ -16,6 +16,8 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     Vector3 cachedScale;
     Vector3 cachedPosition;
+    Vector3 dropPos;
+    Vector3 translatePos;
 
     private void Awake()
     {
@@ -50,7 +52,6 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        transform.localPosition = new Vector3(0, 100, 0);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -76,5 +77,19 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         Debug.Log("Drag");
         transform.position = eventData.position;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Debug.Log("End Drag");
+        dropPos = eventData.position;
+        if(dropPos.y > 400 && dropPos.y < 750 || dropPos.y > 0 && dropPos.y < 200)
+        {
+            Debug.Log("Valid Drop: y = " + dropPos.y + ", x = " +  dropPos.x);
+            translatePos = new Vector3(dropPos.x - 960.0f, dropPos.y, dropPos.z);
+            cachedPosition = translatePos;
+        } else
+        {
+            Debug.Log("Invalid Drop: y = " + dropPos.y + ", x = " + dropPos.x);
+        }
     }
 }
