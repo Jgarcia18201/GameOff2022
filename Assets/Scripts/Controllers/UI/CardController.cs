@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler, IEndDragHandler
 {
     private RectTransform dragCard;
     public Card Card;
@@ -76,5 +76,10 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         Debug.Log("Drag");
         transform.position = eventData.position;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Debug.Log("End Drag");
+        //TO-DO: Card stays in place when eventData is in correct position.
     }
 }
