@@ -16,6 +16,8 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     Vector3 cachedScale;
     Vector3 cachedPosition;
+    Vector3 dropPos;
+    Vector3 translatePos;
 
     private void Awake()
     {
@@ -50,7 +52,6 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        transform.localPosition = new Vector3(0, 100, 0);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -80,6 +81,15 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("End Drag");
-        //TO-DO: Card stays in place when eventData is in correct position.
+        dropPos = eventData.position;
+        if(dropPos.y > 400 && dropPos.y < 750 || dropPos.y > 0 && dropPos.y < 200)
+        {
+            Debug.Log("Valid Drop: y = " + dropPos.y + ", x = " +  dropPos.x);
+            translatePos = new Vector3(dropPos.x - 960.0f, dropPos.y, dropPos.z);
+            cachedPosition = translatePos;
+        } else
+        {
+            Debug.Log("Invalid Drop: y = " + dropPos.y + ", x = " + dropPos.x);
+        }
     }
 }
