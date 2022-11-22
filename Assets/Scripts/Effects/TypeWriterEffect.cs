@@ -5,15 +5,14 @@ using TMPro;
 
 public class TypeWriterEffect : MonoBehaviour
 {
-    [SerializeField] private float typeWriterSpeed = 50f;
 
-    public Coroutine Run(string textToType, TMP_Text textLabel)
+    public Coroutine Run(string textToType, TMP_Text textLabel, int typeWriterSpeed)
     {
-        return StartCoroutine(TypeText(textToType, textLabel));
+        return StartCoroutine(TypeText(textToType, textLabel, typeWriterSpeed));
     }
 
     //IEnumerator allows pauses while iterating through a collection (in this case, of letters)
-    private IEnumerator TypeText(string textToType, TMP_Text textLabel)
+    private IEnumerator TypeText(string textToType, TMP_Text textLabel, int typeWriterSpeed)
     {
         float t = 0;
         int charIndex = 0;

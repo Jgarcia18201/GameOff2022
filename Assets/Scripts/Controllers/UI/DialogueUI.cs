@@ -6,6 +6,9 @@ public class DialogueUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text textLabel;
     [SerializeField] private DialogueObject testDialogue;
+    [SerializeField] private int typeWriterSpeed;
+
+    private double timeElapsedSinceClick = 0;
 
     private TypeWriterEffect typeWriterEffect;
 
@@ -13,6 +16,12 @@ public class DialogueUI : MonoBehaviour
     {
         typeWriterEffect = GetComponent<TypeWriterEffect>();
         ShowDialogue(testDialogue);
+    }
+
+    private void Update()
+    {
+        timeElapsedSinceClick++;
+        Debug.Log(timeElapsedSinceClick);
     }
 
     public void ShowDialogue (DialogueObject dialogueObject)
@@ -24,7 +33,9 @@ public class DialogueUI : MonoBehaviour
     {
         foreach (string dialogue in dialogueObject.Dialogue)
         {
-            yield return typeWriterEffect.Run(dialogue, textLabel);
+            timeElapsedSinceClick = 0;
+            yield return typeWriterEffect.Run(dialogue, textLabel, typeWriterSpeed);
+            yield return new WaitUntil(() => timeElapsedSinceClick >= 800);
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         }
     }
