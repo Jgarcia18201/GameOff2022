@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textLabel: {fileID: 1378616405}
+  testDialogue: {fileID: 11400000, guid: 52bf470c953a4004f8609bafc9afd3b5, type: 2}
 --- !u!114 &806444952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43005a5ed4b3c54d9bec5c9a282a492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeWriterSpeed: 10
+  typeWriterSpeed: 20
 --- !u!1 &1378616404
 GameObject:
   m_ObjectHideFlags: 0
